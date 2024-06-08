@@ -52,6 +52,7 @@ export const authOptions: NextAuthOptions = {
             clientSecret: getGITHUBCredentials().clientSecret,
         }),
     ],
+    secret = process.env.NEXTAUTHSECRET,
     callbacks: {
         async jwt({ token, user }) {
             const dbUserResult = (await db.get(`user:${token.id}`)) as
