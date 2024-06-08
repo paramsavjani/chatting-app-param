@@ -1,5 +1,7 @@
-import Button from "@/components/ui/Button";
+import { db } from "../lib/db";
 
-export default function Home() {
-    return <Button>Home</Button>;
+export default async function Home() {
+    await db.set("hi123123", "hello world");
+
+    return "hi";
 }
