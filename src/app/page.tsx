@@ -1,7 +1,19 @@
-import { db } from "../lib/db";
+"use client"
 
-export default async function Home() {
-    await db.set("hi123123", "hello world");
+import { signIn } from "next-auth/react";
 
-    return "hi";
+export default function Home() {
+
+    const signInwihtgoogle = async () => {
+       try{
+           await signIn("google");
+
+       }
+       catch(err){
+           console.log(err);
+       }
+
+    };
+
+    return <button onClick={()=> signInwihtgoogle()}>Sign in with Google</button>;
 }

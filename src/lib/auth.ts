@@ -23,8 +23,9 @@ export const authOptions: NextAuthOptions = {
     session: {
         strategy: "jwt",
     },
+
     pages: {
-        signIn: "login",
+        signIn: "/login",
     },
     providers: [
         GoogleProvider({
@@ -32,4 +33,41 @@ export const authOptions: NextAuthOptions = {
             clientSecret: getGoogleCredentials().clientSecret,
         }),
     ],
+    callbacks: {
+        async jwt({ token, user }) {
+            const dbUserResult = (await db.get(`user:${token.id}`)) as
+                | string
+                | null;
+
+            if (!dbUserResult) {
+                if (user) {
+                    token.id = user!.id;
+                }
+
+                return token;
+            }
+
+            const dbUser = JSON.parse(dbUserResult) as User;
+
+            return {
+                id: dbUser.id,
+                name: dbUser.name,
+                email: dbUser.email,
+                picture: dbUser.image,
+            };
+        },
+        async session({ session, token }) {
+            if (token) {
+                session.user.id = token.id;
+                session.user.name = token.name;
+                session.user.email = token.email;
+                session.user.image = token.picture;
+            }
+
+            return session;
+        },
+        redirect() {
+            return "/dashboard";
+        },
+    },
 };
