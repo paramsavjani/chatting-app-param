@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lobster&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -11,8 +13,19 @@ html {
     justify-content: center;
     align-items: center;
     background-color: #001a33;
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
     color: #ffffff;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .login-container {
@@ -20,18 +33,82 @@ html {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    animation: slideDown 1s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.intro {
+    margin-bottom: 20px;
+    font-family: 'Lobster', cursive;
+    animation: introFadeIn 1.5s ease-in-out;
+}
+
+@keyframes introFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.intro h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.intro p {
+    font-size: 1.25rem;
 }
 
 .logo img {
     width: 300px;
     height: auto;
     margin-bottom: 30px;
+    animation: logoBounce 2s;
+}
+
+@keyframes logoBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 .button-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: buttonFadeIn 2s ease-in-out;
+}
+
+@keyframes buttonFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .google-button,
@@ -49,6 +126,19 @@ html {
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    animation: buttonSlideIn 1.5s ease-out;
+}
+
+@keyframes buttonSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .google-button:hover,
@@ -69,4 +159,21 @@ html {
 
 .github-button:hover svg {
     filter: invert(1);
+}
+
+
+@media (max-width: 768px) {
+    .intro h1 {
+        font-size: 2rem;
+    }
+
+    .intro p {
+        font-size: 1rem;
+    }
+
+    .google-button,
+    .github-button {
+        font-size: 18px;
+        padding: 10px 20px;
+    }
 }

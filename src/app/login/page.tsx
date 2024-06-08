@@ -1,41 +1,44 @@
-    "use client";
+"use client";
 
-    import { signIn } from "next-auth/react";
-    import Image from "next/image";
-    import "./login.css"; // Import the CSS file
-    import Button from "@/components/ui/Button";
+import { signIn } from "next-auth/react";
+import Image from "next/image";
+import "./login.css"; // Import the CSS file
+import Button from "@/components/ui/Button";
 
-    export default function Home() {
-        const signInWithGoogle = async () => {
-            try {
-                await signIn("google");
-            } catch (err) {
-                console.error(err);
-            }
-        };
-        const signInWithGithub = async () => {
-            try {
-                await signIn("github");
-            } catch (err) {
-                console.error(err);
-            }
-        };
+export default function Home() {
+    const signInWithGoogle = async () => {
+        try {
+            await signIn("google");
+        } catch (err) {
+            console.error(err);
+        }
+    };
+    const signInWithGithub = async () => {
+        try {
+            await signIn("github");
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
-        return (
-            <>
-                <div className="login-container">
-                    <div className="logo">
-                        <Image
-                            src="/logo-of-app.png"
-                            alt="logo"
-                            width={300} // Increase logo size
-                            height={300}
-                        />
-                    </div>
-                    <div className="align-center button-container">
+    return (
+        <>
+            <div className="login-container">
+                <div className="intro">
+                    <h1>Welcome to Our App</h1>
+                    <p>Your gateway to a better experience.</p>
+                </div>
+                <div className="logo">
+                    <Image
+                        src="/logo-of-app.png"
+                        alt="logo"
+                        width={300}
+                        height={300}
+                    />
+                </div>
+                <div className="button-container">
                     <button
                         onClick={signInWithGoogle}
-                        // size="lg"
                         className="google-button"
                     >
                         <svg
@@ -68,7 +71,10 @@
                         </svg>
                         Sign in with Google
                     </button>
-                    <button onClick={signInWithGithub} className="github-button">
+                    <button
+                        onClick={signInWithGithub}
+                        className="github-button"
+                    >
                         <svg
                             className="mr-2 h-4 w-4"
                             aria-hidden="true"
@@ -86,8 +92,8 @@
                         </svg>
                         Sign in with Github
                     </button>
-                    </div>
                 </div>
-            </>
-        );
-    }
+            </div>
+        </>
+    );
+}
