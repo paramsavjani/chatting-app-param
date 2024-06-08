@@ -42,6 +42,7 @@ export const authOptions: NextAuthOptions = {
     pages: {
         signIn: "/login",
     },
+     secret = process.env.NEXTAUTHSECRET,
     providers: [
         GoogleProvider({
             clientId: getGoogleCredentials().clientId,
