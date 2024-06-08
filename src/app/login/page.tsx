@@ -13,6 +13,13 @@ export default function Home() {
             console.error(err);
         }
     };
+    const signInWithGithub = async () => {
+        try {
+            await signIn("github");
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     return (
         <>
@@ -25,6 +32,7 @@ export default function Home() {
                         height={300}
                     />
                 </div>
+                <div>
                 <button
                     onClick={signInWithGoogle}
                     // size="lg"
@@ -60,6 +68,25 @@ export default function Home() {
                     </svg>
                     Sign in with Google
                 </button>
+                <button onClick={signInWithGithub} className="github-button">
+                    <svg
+                        className="mr-2 h-4 w-4"
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fab"
+                        data-icon="github"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="#000000"
+                            d="M12,0C5.373,0,0,5.373,0,12c0,5.303,3.438,9.8,8.208,11.371c0.6,0.111,0.822-0.261,0.822-0.579 c0-0.286-0.012-1.039-0.015-2.039c-3.338,0.724-4.042-1.609-4.042-1.609c-0.547-1.393-1.333-1.762-1.333-1.762 c-1.089-0.745,0.083-0.729,0.083-0.729c1.203,0.084,1.838,1.234,1.838,1.234c1.07,1.834,2.811,1.305,3.494,0.998 c0.109-0.775,0.418-1.305,0.762-1.605c-2.665-0.3-5.466-1.332-5.466-5.93c0-1.312,0.468-2.385,1.235-3.232 c-0.124-0.3-0.535-1.523,0.116-3.176c0,0,1.007-0.322,3.3,1.23c0.959-0.266,1.984-0.398,3.002-0.402 c1.016,0.004,2.041,0.136,3,0.402c2.291-1.552,3.295-1.23,3.295-1.23c0.652,1.652,0.242,2.876,0.118,3.176 c0.771,0.847,1.234,1.92,1.234,3.232c0,4.61-2.805,5.625-5.475,5.922c0.429,0.371,0.813,1.102,0.813,2.221 c0,1.605-0.014,2.895-0.014,3.289c0,0.32,0.216,0.694,0.829,0.577C20.566,21.799,24,17.303,24,12 C24,5.373,18.627,0,12,0z"
+                        />
+                    </svg>
+                    Sign in with Github
+                </button>
+                </div>
             </div>
         </>
     );
