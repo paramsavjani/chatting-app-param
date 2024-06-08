@@ -1,0 +1,56 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #001a33;
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+}
+
+.login-container {
+    text-align: center;
+}
+
+.logo img {
+    width: 300px;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+
+.google-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #ffffff;
+    color: #001a33;
+    border: 2px solid #001a33;
+    padding: 12px 24px;
+    border-radius: 35px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.google-button:hover {
+    background-color: #12283d;
+    color: #ffffff;
+    box-shadow: 0 0 20px rgb(253, 252, 252);
+    transform: scale(1.05);
+}
+
+.google-button svg {
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
