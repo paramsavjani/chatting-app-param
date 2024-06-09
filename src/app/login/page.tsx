@@ -15,7 +15,7 @@ const SignInSignUp = () => {
 
     const signwithGoogle = async () => {
         try {
-            signIn("google");
+           await signIn("google");
         } catch (e) {
             console.log(e);
         } finally {
