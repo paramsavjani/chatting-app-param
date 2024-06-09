@@ -139,6 +139,21 @@ html {
     .button {
         padding: 0.5rem 1rem;
         font-size: 1rem;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        color: white;
+        background-color: #0134a3;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        max-width: 300px;
     }
 
     .button-icon {
