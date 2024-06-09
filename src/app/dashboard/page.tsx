@@ -3,7 +3,6 @@ import { Session, getServerSession } from "next-auth";
 import { FC } from "react";
 
 const temp = (session: Session | null) => {
-    "use client";
     console.log(session);
 };
 const page = async () => {
