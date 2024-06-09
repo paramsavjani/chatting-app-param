@@ -2,8 +2,8 @@ import { NextAuthOptions } from "next-auth";
 import { UpstashRedisAdapter } from "@next-auth/upstash-redis-adapter";
 import { db } from "./db";
 import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github"; // Correct import
 import { fetchRedis } from "@/helpers/redis";
-import Github from "next-auth/providers/github";
 
 function getGoogleCredentials() {
     const clientId = process.env.GOOGLE_CLIENT_ID;
@@ -34,7 +34,8 @@ export const authOptions: NextAuthOptions = {
             clientId: getGoogleCredentials().clientId,
             clientSecret: getGoogleCredentials().clientSecret,
         }),
-        Github({
+        GithubProvider({
+            // Correct usage
             clientId: process.env.GITHUB_CLIENT_ID!,
             clientSecret: process.env.GITHUB_CLIENT_SECRET!,
         }),
