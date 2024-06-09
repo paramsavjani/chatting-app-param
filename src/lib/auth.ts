@@ -30,10 +30,10 @@ export const authOptions: NextAuthOptions = {
         signIn: "/login",
     },
     providers: [
-        GoogleProvider({
-            clientId: getGoogleCredentials().clientId,
-            clientSecret: getGoogleCredentials().clientSecret,
-        }),
+        // GoogleProvider({
+        //     clientId: getGoogleCredentials().clientId,
+        //     clientSecret: getGoogleCredentials().clientSecret,
+        // }),
         GithubProvider({
             // Correct usage
             clientId: process.env.GITHUB_CLIENT_ID!,

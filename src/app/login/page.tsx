@@ -40,7 +40,7 @@ const Page: FC = () => {
                     </h2>
                 </div>
 
-                <Button
+                {/* <Button
                     isLoading={isLoading}
                     type="button"
                     className="max-w-sm mx-auto w-full"
@@ -77,7 +77,7 @@ const Page: FC = () => {
                         </svg>
                     )}
                     Google
-                </Button>
+                </Button> */}
 
                 <Button
                     isLoading={isLoading}
