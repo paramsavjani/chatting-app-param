@@ -50,7 +50,7 @@ html {
     font-size: 1.2rem;
     font-weight: 600;
     color: white;
-    background-color: #05266e;
+    background-color: #0134a3;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
     position: relative;
@@ -138,8 +138,7 @@ html {
 
     .button {
         padding: 0.5rem 1rem;
-        font-size: 0.975rem;
-        background-color: #062d81;
+        font-size: 1rem;
     }
 
     .button-icon {
