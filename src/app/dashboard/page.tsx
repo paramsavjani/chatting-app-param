@@ -1,13 +1,15 @@
 import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
+import { Session, getServerSession } from "next-auth";
 import { FC } from "react";
 
-interface pageProps {}
-
+const temp = (session: Session | null) => {
+    "use client";
+    console.log(session);
+};
 const page = async () => {
     const session = await getServerSession(authOptions);
-    console.log(session)
-    return <div>page</div>;
+    temp(session);
+    return <pre>{JSON.stringify(session, null, 2)}</pre>;
 };
 
 export default page;
