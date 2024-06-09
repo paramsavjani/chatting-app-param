@@ -2,8 +2,8 @@ import { NextAuthOptions } from "next-auth";
 import { UpstashRedisAdapter } from "@next-auth/upstash-redis-adapter";
 import { db } from "./db";
 import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
 import { fetchRedis } from "@/helpers/redis";
-import Github from "next-auth/providers/github";
 
 function getGoogleCredentials() {
     const clientId = process.env.GOOGLE_CLIENT_ID;
@@ -34,34 +34,38 @@ export const authOptions: NextAuthOptions = {
             clientId: getGoogleCredentials().clientId,
             clientSecret: getGoogleCredentials().clientSecret,
         }),
-        Github({
+        GithubProvider({
             clientId: process.env.GITHUB_CLIENT_ID!,
             clientSecret: process.env.GITHUB_CLIENT_SECRET!,
         }),
     ],
     callbacks: {
         async jwt({ token, user }) {
-            const dbUserResult = (await fetchRedis(
-                "get",
-                `user:${token.id}`
-            )) as string | null;
+            try {
+                const dbUserResult = (await fetchRedis(
+                    "get",
+                    `user:${token.id}`
+                )) as string | null;
 
-            if (!dbUserResult) {
-                if (user) {
-                    token.id = user!.id;
+                if (!dbUserResult) {
+                    if (user) {
+                        token.id = user.id;
+                    }
+                    return token;
                 }
 
+                const dbUser = JSON.parse(dbUserResult) as User;
+
+                return {
+                    id: dbUser.id,
+                    name: dbUser.name,
+                    email: dbUser.email,
+                    picture: dbUser.image,
+                };
+            } catch (error) {
+                console.error("JWT callback error:", error);
                 return token;
             }
-
-            const dbUser = JSON.parse(dbUserResult) as User;
-
-            return {
-                id: dbUser.id,
-                name: dbUser.name,
-                email: dbUser.email,
-                picture: dbUser.image,
-            };
         },
         async session({ session, token }) {
             if (token) {
@@ -70,7 +74,6 @@ export const authOptions: NextAuthOptions = {
                 session.user.email = token.email;
                 session.user.image = token.picture;
             }
-
             return session;
         },
         redirect() {
