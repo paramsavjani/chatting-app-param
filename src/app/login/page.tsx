@@ -19,17 +19,6 @@ const Page: FC = () => {
         }
     }
 
-    async function loginWithGithub() {
-        setIsLoading(true);
-        try {
-            await signIn("github");
-        } catch (error) {
-            toast.error("Something went wrong with your login.");
-        } finally {
-            setIsLoading(false);
-        }
-    }
-
     return (
         <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="w-full flex flex-col items-center max-w-md space-y-8">
@@ -77,32 +66,6 @@ const Page: FC = () => {
                         </svg>
                     )}
                     Google
-                </Button>
-
-                <Button
-                    isLoading={isLoading}
-                    type="button"
-                    className="max-w-sm mx-auto w-full"
-                    onClick={loginWithGithub}
-                >
-                    {isLoading ? null : (
-                        <svg
-                            className="mr-2 h-4 w-4"
-                            aria-hidden="true"
-                            focusable="false"
-                            data-prefix="fab"
-                            data-icon="github"
-                            role="img"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                fillRule="evenodd"
-                                d="M12 2C6.48 2 2 6.48 2 12c0 4.418 2.87 8.166 6.84 9.49.5.09.66-.22.66-.47v-1.7c-2.77.6-3.36-1.34-3.36-1.34-.45-1.17-1.11-1.48-1.11-1.48-.91-.62.07-.61.07-.61 1 .07 1.54 1.02 1.54 1.02.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.1.64-1.35-2.22-.25-4.56-1.12-4.56-5 0-1.1.39-2 1.03-2.7-.1-.26-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.6 9.6 0 0112 7.68c.85.004 1.7.11 2.5.33 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.7 0 3.88-2.34 4.75-4.57 5 .36.31.68.93.68 1.87v2.78c0 .26.16.56.67.47C19.13 20.16 22 16.42 22 12c0-5.52-4.48-10-10-10z"
-                            />
-                        </svg>
-                    )}
-                    GitHub
                 </Button>
             </div>
         </div>
