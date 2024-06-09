@@ -1,8 +1,12 @@
+"use client";
 import { FC } from "react";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 
-interface pageProps {}
-const page: FC<pageProps> = ({}) => {
-    return <h1>page is this</h1>;
+const page = async ({}) => {
+    const session = await getServerSession(authOptions);
+
+    return <div>hi parm</div>;
 };
 
 export default page;
