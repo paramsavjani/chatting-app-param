@@ -1,5 +1,5 @@
 {
-  "name": "chatting-app",
+  "name": "chattingsphere",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.5.2",
     "@next-auth/upstash-redis-adapter": "^3.0.4",
     "@upstash/redis": "^1.31.3",
     "class-variance-authority": "^0.7.0",
@@ -17,7 +16,7 @@
     "lucide-react": "^0.390.0",
     "next": "14.2.3",
     "next-auth": "^4.24.7",
-    "react": "^18.3.1",
+    "react": "^18",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
     "tailwind-merge": "^2.3.0"

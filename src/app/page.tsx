@@ -1,11 +1,5 @@
-import { FC } from 'react'
+import Image from "next/image";
 
-interface pageProps {
-  
+export default function Home() {
+    return <h1>Home</h1>;
 }
-
-const page: FC<pageProps> = ({}) => {
-  return <div>page</div>
-}
-
-export default page
