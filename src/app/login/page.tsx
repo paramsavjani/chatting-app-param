@@ -1,9 +1,9 @@
 "use client";
 
-import Button from "@/components/ui/Button";
 import { FC, useState } from "react";
 import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
+import "./login.css";
 
 const Page: FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -20,24 +20,20 @@ const Page: FC = () => {
     }
 
     return (
-        <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-            <div className="w-full flex flex-col items-center max-w-md space-y-8">
-                <div className="flex flex-col items-center gap-8">
-                    <div>Logo</div>
-                    <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-                        Sign in to your account
-                    </h2>
-                </div>
-
-                <Button
-                    isLoading={isLoading}
-                    type="button"
-                    className="max-w-sm mx-auto w-full"
-                    onClick={loginWithGoogle}
-                >
-                    {isLoading ? null : (
+        <div className="container">
+            <img src="/logo.png" alt="Chatter Sphere Logo" className="logo" />
+            <h2 className="title">Welcome to Chatter Sphere</h2>
+            <button
+                className="button"
+                onClick={loginWithGoogle}
+                disabled={isLoading}
+            >
+                {isLoading ? (
+                    <span>Loading...</span>
+                ) : (
+                    <>
                         <svg
-                            className="mr-2 h-4 w-4"
+                            className="button-icon"
                             aria-hidden="true"
                             focusable="false"
                             data-prefix="fab"
@@ -64,10 +60,10 @@ const Page: FC = () => {
                             />
                             <path d="M1 1h22v22H1z" fill="none" />
                         </svg>
-                    )}
-                    Google
-                </Button>
-            </div>
+                        Sign in with Google
+                    </>
+                )}
+            </button>
         </div>
     );
 };
