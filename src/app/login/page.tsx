@@ -33,11 +33,11 @@ const SignInSignUp = () => {
                     <form action="#">
                         <h1>Create Account</h1>
                         <div className="social-container">
-                            <a href="#" className="social">
-                                <i className="fab fa-facebook-f"></i>
+                            <a onClick={signwithGoogle} href="#" className="social">
+                                <i className="fab fa-google"></i>
                             </a>
                             <a href="#" className="social">
-                                <i className="fab fa-google"></i>
+                                <i className="fab fa-facebook-f"></i>
                             </a>
                             <a href="#" className="social">
                                 <i className="fab fa-linkedin-in"></i>
