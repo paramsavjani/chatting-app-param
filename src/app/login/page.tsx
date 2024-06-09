@@ -3,6 +3,7 @@
 import { FC, useState } from "react";
 import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
+import Image from "next/image";
 import "./login.css";
 
 const Page: FC = () => {
@@ -21,7 +22,14 @@ const Page: FC = () => {
 
     return (
         <div className="container">
-            <img src="/logo.png" alt="Chatter Sphere Logo" className="logo" />
+            <div className="logo">
+                <Image
+                    src="/logo.png"
+                    alt="Chatter Sphere Logo"
+                    width={180}
+                    height={180}
+                />
+            </div>
             <h2 className="title">Welcome to Chatter Sphere</h2>
             <button
                 className="button"
