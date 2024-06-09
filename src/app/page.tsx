@@ -1,20 +1,11 @@
-"use client"
+import { FC } from 'react'
 
-import { signIn } from "next-auth/react";
-import Button from "../components/ui/Button";
-
-export default function Home() {
-
-    const signInwihtgoogle = async () => {
-       try{
-           await signIn("google");
-
-       }
-       catch(err){
-           console.log(err);
-       }
-
-    };
-
-    return <button onClick={()=> signInwihtgoogle()}>Sign in with Google</button>;
+interface pageProps {
+  
 }
+
+const page: FC<pageProps> = ({}) => {
+  return <div>page</div>
+}
+
+export default page
