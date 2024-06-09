@@ -26,9 +26,8 @@ const Page: FC = () => {
                 <div className="w-full flex flex-col items-center max-w-md space-y-8">
                     <div className="flex flex-col items-center gap-8">
                         <Image
-                            className=""
                             src="/logo-of-app.png"
-                            alt="Workflow"
+                            alt="logo of app"
                             width={300}
                             height={300}
                         />
