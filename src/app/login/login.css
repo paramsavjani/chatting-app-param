@@ -139,6 +139,7 @@ html {
     .button {
         padding: 0.5rem 1rem;
         font-size: 0.975rem;
+        background-color: #062d81;
     }
 
     .button-icon {
