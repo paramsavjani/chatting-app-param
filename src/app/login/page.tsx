@@ -31,6 +31,11 @@ const Page: FC = () => {
                 />
             </div>
             <h2 className="title">Welcome to Chatter Sphere</h2>
+            <p className="welcome-message">
+                Connect with your friends and family through seamless
+                conversations. Chatter Sphere is the ultimate chatting app that
+                brings everyone closer.
+            </p>
             <button
                 className="button"
                 onClick={loginWithGoogle}
