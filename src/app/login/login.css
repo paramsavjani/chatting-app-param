@@ -1,20 +1,20 @@
-/* styles.css */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap');
 
 body,
 html {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: 'Poppins', sans-serif;
-    background: #1f2937;
+    font-family: 'Poppins', 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #1f2937, #3b82f6);
     display: flex;
     justify-content: center;
+    width: 100%;
     align-items: center;
 }
 
 .container {
-    background: #001a34;
+    background: rgba(0, 26, 52, 0.85);
     padding: 2.5rem;
     border-radius: 0.75rem;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
@@ -37,10 +37,11 @@ html {
     font-weight: 700;
     color: #e5e7eb;
     margin-bottom: 2rem;
+    font-family: 'Roboto', sans-serif;
 }
 
 .button {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -50,7 +51,7 @@ html {
     font-size: 1.2rem;
     font-weight: 600;
     color: white;
-    background-color: #0134a3;
+    background-color: #1d4ed8;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
     position: relative;
@@ -77,7 +78,7 @@ html {
 }
 
 .button:hover {
-    background-color: #1d4ed8;
+    background-color: #2563eb;
     transform: scale(1.05);
     box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
 }
@@ -139,21 +140,7 @@ html {
     .button {
         padding: 0.5rem 1rem;
         font-size: 1rem;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border: none;
-        border-radius: 0.5rem;
-        font-weight: 600;
-        color: white;
-        background-color: #0134a3;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-        position: relative;
-        overflow: hidden;
-        width: 100%;
-        max-width: 300px;
+        max-width: 100%;
     }
 
     .button-icon {
