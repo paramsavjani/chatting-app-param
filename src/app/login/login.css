@@ -31,7 +31,6 @@ html {
     align-items: center;
     margin-bottom: 1rem;
     animation: bounceIn 1s ease-in-out;
-    filter: invert(1);
 }
 
 .title {
