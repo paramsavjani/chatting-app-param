@@ -36,6 +36,7 @@ html {
     font-size: 2rem;
     font-weight: 700;
     color: #e5e7eb;
+    line-height: normal;
     margin-bottom: 1rem;
     font-family: 'Raleway', sans-serif;
 }
@@ -44,6 +45,7 @@ html {
     font-size: 1.2rem;
     color: #9ca3af;
     margin-bottom: 2rem;
+    line-height: normal;
     font-family: 'Raleway', sans-serif;
 }
 
