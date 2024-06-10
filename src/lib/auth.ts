@@ -2,18 +2,19 @@ import { NextAuthOptions } from "next-auth";
 import { UpstashRedisAdapter } from "@next-auth/upstash-redis-adapter";
 import { db } from "./db";
 import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
 import { fetchRedis } from "@/helpers/redis";
 
-function getGoogleCredentials() {
-    const clientId = process.env.GOOGLE_CLIENT_ID;
-    const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+function getCredentials(provider: String) {
+    const clientId = process.env[`${provider}_CLIENT_ID`];
+    const clientSecret = process.env[`${provider}_CLIENT_SECRET`];
 
     if (!clientId || clientId.length === 0) {
-        throw new Error("Missing GOOGLE_CLIENT_ID");
+        throw new Error(`Missing ${provider}_CLIENT_ID`);
     }
 
     if (!clientSecret || clientSecret.length === 0) {
-        throw new Error("Missing GOOGLE_CLIENT_SECRET");
+        throw new Error(`Missing ${provider}_CLIENT_SECRET`);
     }
 
     return { clientId, clientSecret };
@@ -29,10 +30,8 @@ export const authOptions: NextAuthOptions = {
         signIn: "/login",
     },
     providers: [
-        GoogleProvider({
-            clientId: getGoogleCredentials().clientId,
-            clientSecret: getGoogleCredentials().clientSecret,
-        }),
+        GoogleProvider(getCredentials("GOOGLE")),
+        GitHubProvider(getCredentials("GITHUB")),
     ],
     callbacks: {
         async jwt({ token, user }) {
@@ -49,9 +48,10 @@ export const authOptions: NextAuthOptions = {
                     return token;
                 }
 
-                const dbUser = JSON.parse(dbUserResult) as User;
+                const dbUser = JSON.parse(dbUserResult);
 
                 return {
+                    ...token,
                     id: dbUser.id,
                     name: dbUser.name,
                     email: dbUser.email,
@@ -69,6 +69,9 @@ export const authOptions: NextAuthOptions = {
                 session.user.email = token.email;
                 session.user.image = token.picture;
             }
+
+            console.log(session);
+
             return session;
         },
         redirect() {
