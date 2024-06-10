@@ -62,7 +62,7 @@ html {
     font-size: 1.2rem;
     font-weight: 600;
     color: white;
-    background-color: #1d4ed8;
+    background-color: #0232fc;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
     position: relative;
@@ -159,8 +159,8 @@ html {
     }
 
     .button-icon {
-        width: 16px;
-        height: 16px;
+        width: 26px;
+        height: 26px;
         margin-right: 0.25rem;
     }
 }
