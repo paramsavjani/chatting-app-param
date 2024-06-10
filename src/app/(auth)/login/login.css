@@ -134,8 +134,8 @@ html {
 }
 
 .button-icon {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     margin-right: 0.5rem;
 }
 
@@ -159,8 +159,8 @@ html {
     }
 
     .button-icon {
-        width: 26px;
-        height: 26px;
+        width: 28px;
+        height: 28px;
         margin-right: 0.35rem;
     }
 }
