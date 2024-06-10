@@ -16,7 +16,7 @@ const Page: FC = () => {
         } catch (error) {
             toast.error("Something went wrong with your login.");
         } finally {
-            setIsLoading(false);
+            setTimeout(() => setIsLoading(false), 2000);
         }
     }
 
