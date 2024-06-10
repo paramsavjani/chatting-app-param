@@ -100,8 +100,8 @@ const Page: FC = () => {
                     <>
                         <Image
                             src="/github-icon.svg"
-                            width={0}
-                            height={0}
+                            width={100}
+                            height={100}
                             alt="GitHub Icon"
                             className="button-icon"
                         />
