@@ -3,7 +3,6 @@ import { UpstashRedisAdapter } from "@next-auth/upstash-redis-adapter";
 import { db } from "./db";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
-import { fetchRedis } from "@/helpers/redis";
 
 function getCredentials(provider: String) {
     const clientId = process.env[`${provider}_CLIENT_ID`];
@@ -36,10 +35,9 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         async jwt({ token, user }) {
             try {
-                const dbUserResult = (await fetchRedis(
-                    "get",
-                    `user:${token.id}`
-                )) as string | null;
+                const dbUserResult = (await db.get(`user:${token.id}`)) as
+                    | string
+                    | null;
 
                 if (!dbUserResult) {
                     if (user) {
