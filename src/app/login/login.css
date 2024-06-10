@@ -14,7 +14,8 @@ html {
 }
 
 .container {
-    background: rgba(0, 26, 52, 0.85);
+    /* background: rgba(0, 26, 52, 0.85); */
+    background-color: black;
     padding: 2.5rem;
     border-radius: 0.75rem;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
@@ -30,6 +31,7 @@ html {
     align-items: center;
     margin-bottom: 1rem;
     animation: bounceIn 1s ease-in-out;
+    filter: invert(1);
 }
 
 .title {

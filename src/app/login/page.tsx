@@ -23,12 +23,7 @@ const Page: FC = () => {
     return (
         <div className="container">
             <div className="logo">
-                <Image
-                    src="/logo.png"
-                    alt="Chatter Sphere Logo"
-                    width={180}
-                    height={180}
-                />
+                <Image src="/svg-for-app.svg" width={300} height={300} alt="Logo" className="logo-icon" />
             </div>
             <h2 className="title">Welcome to Chatter Sphere</h2>
             <p className="welcome-message">
