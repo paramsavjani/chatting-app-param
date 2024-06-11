@@ -7,7 +7,7 @@ import Button from "./ui/Button";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
+import "./styles.css";
 
 interface AddFriendButtonProps {}
 
@@ -31,9 +31,7 @@ const AddFriendButton: FC<AddFriendButtonProps> = () => {
             setLoading(true);
             const validatedEmail = AddFriendSchema.parse({ email });
 
-            const res = await axios.post("/api/friends/add", {
-                email: validatedEmail,
-            });
+            await axios.post("/api/friends/add", { email: validatedEmail });
 
             setShowSuccessState(true);
         } catch (error) {
@@ -48,7 +46,7 @@ const AddFriendButton: FC<AddFriendButtonProps> = () => {
             setError("email", { message: error.message });
         } else if (error instanceof AxiosError) {
             setError("email", { message: error.response?.data });
-            console.log(error)
+            console.log(error);
         } else {
             setError("email", { message: "Something went wrong." });
         }
@@ -59,46 +57,31 @@ const AddFriendButton: FC<AddFriendButtonProps> = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 py-6 sm:py-12">
-            <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-indigo-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-lg"></div>
-                <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-lg sm:p-20">
-                    <h2 className="text-2xl font-extrabold text-center mb-6">
-                        Add a Friend
-                    </h2>
-                    <form
-                        onSubmit={handleSubmit(onSubmit)}
-                        className="max-w-sm mx-auto"
-                    >
-                        <label
-                            htmlFor="email"
-                            className="block text-sm font-medium text-gray-700 mb-1"
-                        >
+        <div className="container">
+            <div className="card">
+                <div className="card-background"></div>
+                <div className="card-content">
+                    <h2 className="title">Add a Friend</h2>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <label htmlFor="email" className="label">
                             Add friend by E-Mail
                         </label>
-                        <div className="mt-3 flex gap-4">
+                        <div className="input-group">
                             <input
                                 {...register("email")}
                                 type="text"
-                                className={`block w-full rounded-md py-2 px-3 border ${
-                                    errors.email
-                                        ? "border-red-500"
-                                        : "border-gray-300"
-                                } shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:-translate-y-1`}
+                                className={`input ${
+                                    errors.email ? "error" : ""
+                                }`}
                                 placeholder="you@example.com"
                             />
-                            <Button
-                                disabled={loading}
-                                className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 disabled:opacity-50 transition duration-300 ease-in-out transform hover:scale-105"
-                            >
+                            <Button disabled={loading} className="button">
                                 {loading ? "Adding..." : "Add"}
                             </Button>
                         </div>
-                        <p className="mt-2 text-sm text-red-600 animate-fade-in">
-                            {errors.email?.message}
-                        </p>
+                        <p className="error-message">{errors.email?.message}</p>
                         {showSuccessState && (
-                            <p className="mt-2 text-sm text-green-600 animate-fade-in">
+                            <p className="success-message">
                                 Friend request sent!
                             </p>
                         )}
