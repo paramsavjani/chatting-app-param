@@ -34,6 +34,7 @@ const AddFriendButton: FC<AddFriendButtonProps> = () => {
             await axios.post("/api/friends/add", { email: validatedEmail });
 
             setShowSuccessState(true);
+            setError("email", { message: "" });
             setTimeout(() => {
                 setShowSuccessState(false);
             }, 3500);
