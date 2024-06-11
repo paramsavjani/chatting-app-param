@@ -82,9 +82,15 @@ const AddFriendButton: FC<AddFriendButtonProps> = () => {
                                 {loading ? "Adding..." : "Add"}
                             </Button>
                         </div>
-                        <p className="error-message">{errors.email?.message}</p>
+                        <p className="error-message">
+                            {errors.email && (
+                                <i className="fas fa-exclamation-circle icon"></i>
+                            )}
+                            {errors.email?.message}
+                        </p>
                         {showSuccessState && (
                             <p className="success-message">
+                                <i className="fas fa-check-circle icon"></i>
                                 Friend request sent!
                             </p>
                         )}
