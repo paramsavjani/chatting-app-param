@@ -106,10 +106,10 @@ body {
 
 .error-message {
     margin-top: 0.5rem;
-    font-size: 0.875rem;
+    font-size: 1rem;
     color: #e53e3e;
     animation: fadeIn 0.5s ease-in-out;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .success-message {
