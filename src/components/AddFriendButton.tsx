@@ -36,7 +36,7 @@ const AddFriendButton: FC<AddFriendButtonProps> = () => {
             setShowSuccessState(true);
             setTimeout(() => {
                 setShowSuccessState(false);
-            }, 3000);
+            }, 3500);
         } catch (error) {
             handleError(error);
         } finally {
