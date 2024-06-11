@@ -1,9 +1,35 @@
+"use client";
+
+import { AddFriendSchema } from "@/lib/validation/add-friend";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios, { Axios, AxiosError } from "axios";
 import { FC, useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 interface AddFriendButtonProps {}
 
 const AddFriendButton: FC<AddFriendButtonProps> = () => {
+    const [showSuccessState, setShowSuccessState] = useState(false);
 
+    const {} = useForm({ resolver: zodResolver(AddFriendSchema) });
+
+    const addFriend = async (email: string) => {
+        try {
+            const validatemail = AddFriendSchema.parse({ email });
+            await axios.post("/api/friends/add", { email: validatemail });
+            setShowSuccessState(true);
+        } catch (error) {
+            if (error instanceof z.ZodError) {
+                console.log(error);
+                return;
+            }
+            if (error instanceof AxiosError) {
+                console.log(error);
+                return;
+            }
+        }
+    };
     return (
         <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-800 to-blue-600">
             <div className="container bg-black p-10 rounded-xl shadow-xl text-center max-w-md w-full">
@@ -14,7 +40,7 @@ const AddFriendButton: FC<AddFriendButtonProps> = () => {
                     Connect with your friends by sending them friend requests.
                     Once accepted, you&apos;ll become friends!
                 </p>
-                <form  className="space-y-4">
+                <form className="space-y-4">
                     <label
                         htmlFor="email"
                         className="block text-sm font-medium text-gray-300 mb-2"
