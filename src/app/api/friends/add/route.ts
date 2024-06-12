@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { fetchRedis } from "@/helpers/redis";
 import { db } from "@/lib/db";
+import { z } from "zod";
 
 export async function POST(req: Request) {
     try {
@@ -15,7 +16,10 @@ export async function POST(req: Request) {
         )) as string;
 
         if (!idToAdd) {
-            return new Response("This person does have account in Chatter Sphere.", { status: 400 });
+            return new Response(
+                "This person does have account in Chatter Sphere.",
+                { status: 400 }
+            );
         }
         const session = await getServerSession(authOptions);
         if (!session) {
@@ -35,7 +39,10 @@ export async function POST(req: Request) {
         )) as 0 | 1;
 
         if (isAlreadyAdded) {
-            return new Response("You have already sent a friend request to this person", { status: 400 });
+            return new Response(
+                "You have already sent a friend request to this person",
+                { status: 400 }
+            );
         }
 
         // check if user is already added
@@ -58,6 +65,9 @@ export async function POST(req: Request) {
 
         return new Response("ok");
     } catch (error) {
-        
+        if (error instanceof z.ZodError) {
+            return new Response("Invalid request payload", { status: 422 });
+        }
+        return new Response("Something went wrong", { status: 400 });
     }
 }
