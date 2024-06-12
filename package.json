@@ -8,7 +8,6 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "type": "module",
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
     "@next-auth/upstash-redis-adapter": "^3.0.4",
