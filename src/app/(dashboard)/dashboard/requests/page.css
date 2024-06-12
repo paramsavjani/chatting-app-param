@@ -16,7 +16,7 @@ body {
     margin: 0 auto;
 }
 
-.page-title {
+.page-title-1 {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 2rem;
@@ -37,7 +37,7 @@ body {
         padding: 2rem;
     }
 
-    .page-title {
-        text-align: left;
+    .page-title-1 {
+        text-align: center;
     }
 }

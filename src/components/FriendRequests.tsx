@@ -22,34 +22,24 @@ const FriendRequests: FC<FriendRequestsProps> = ({
         IncomingFriendRequest[]
     >(incomingFriendRequests);
 
-    const handleAccept = async (senderId: string) => {
-        try {
-            await axios.post(`/api/friend-requests/accept`, {
-                senderId,
-                sessionId,
-            });
-            setFriendRequests((prev) =>
-                prev.filter((request) => request.senderId !== senderId)
-            );
-            router.refresh(); // Assuming this refreshes the data
-        } catch (error) {
-            console.error("Error accepting friend request:", error);
-        }
+    const acceptFriend = async (senderId: string) => {
+        await axios.post("/api/friends/accept", { id: senderId });
+
+        setFriendRequests((prev) =>
+            prev.filter((request) => request.senderId !== senderId)
+        );
+
+        router.refresh();
     };
 
-    const handleDeny = async (senderId: string) => {
-        try {
-            await axios.post(`/api/friend-requests/deny`, {
-                senderId,
-                sessionId,
-            });
-            setFriendRequests((prev) =>
-                prev.filter((request) => request.senderId !== senderId)
-            );
-            router.refresh(); // Assuming this refreshes the data
-        } catch (error) {
-            console.error("Error denying friend request:", error);
-        }
+    const denyFriend = async (senderId: string) => {
+        await axios.post("/api/friends/deny", { id: senderId });
+
+        setFriendRequests((prev) =>
+            prev.filter((request) => request.senderId !== senderId)
+        );
+
+        router.refresh();
     };
 
     return (
@@ -75,14 +65,14 @@ const FriendRequests: FC<FriendRequestsProps> = ({
                         </div>
                         <div className="buttons">
                             <button
-                                onClick={() => handleAccept(request.senderId)}
+                                onClick={() => acceptFriend(request.senderId)}
                                 aria-label="accept friend"
                                 className="button accept"
                             >
                                 <Check />
                             </button>
                             <button
-                                onClick={() => handleDeny(request.senderId)}
+                                onClick={() => denyFriend(request.senderId)}
                                 aria-label="deny friend"
                                 className="button deny"
                             >

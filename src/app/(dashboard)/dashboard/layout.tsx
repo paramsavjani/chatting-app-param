@@ -55,9 +55,31 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
                 <nav className="flex flex-1 flex-col">
                     <ul
                         role="list"
-                        className="flex flex-1 flex-col gap-y-7 px-4"
+                        className="flex flex-1 flex-col gap-y-3 px-4"
                     >
-                        <li>(//your chats)</li>
+                        {friends.map((friend) => {
+                            return (
+                                <li key={friend.id}>
+                                    <Link
+                                        href={`/dashboard/chat/${friend.id}`}
+                                        className="flex gap-3 items-center text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group rounded-md p-1 text-sm font-semibold leading-6"
+                                    >
+                                        <div className="relative h-10 w-10 bg-gray-50">
+                                            <Image
+                                                fill
+                                                referrerPolicy="no-referrer"
+                                                className="rounded-full"
+                                                src={friend.image || ""}
+                                                alt="Friend's profile picture"
+                                            />
+                                        </div>
+                                        <span className="truncate">
+                                            {friend.name}
+                                        </span>
+                                    </Link>
+                                </li>
+                            );
+                        })}
                         <li>
                             <div className="text-xs font-semibold leading-6 text-gray-400">
                                 Overview

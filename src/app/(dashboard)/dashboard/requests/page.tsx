@@ -35,7 +35,7 @@ const Page: FC = async () => {
 
     return (
         <main className="main-container">
-            <h1 className="page-title">Add friends</h1>
+            <h1 className="page-title-1">Add friends</h1>
             <div className="friend-requests-container">
                 <FriendRequests
                     incomingFriendRequests={incomingFriendRequests}
