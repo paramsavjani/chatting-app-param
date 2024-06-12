@@ -7,8 +7,8 @@ import FriendRequestSidebarOptions from "./FriendRequestSidebarOptions";
 import { Session } from "next-auth";
 import SignOutButton from "./SignOutButton";
 import { FC } from "react";
-import { set } from "zod";
 import { usePathname } from "next/navigation";
+
 interface LayoutProps {
     unseenRequestCount: number;
     friends: User[];
@@ -21,11 +21,11 @@ const Dashboard: FC<LayoutProps> = ({
     friends,
 }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const pathame = usePathname();
+    const pathname = usePathname();
 
     useEffect(() => {
         setSidebarOpen(false);
-    }, [pathame]);
+    }, [pathname]);
 
     return (
         <>
@@ -41,9 +41,9 @@ const Dashboard: FC<LayoutProps> = ({
 
             {/* Sidebar */}
             <div
-                className={`fixed inset-y-0 left-0 z-50 w-3/4 max-w-xs bg-white border-r border-gray-200 transform ${
+                className={`fixed inset-y-0 left-0 z-50 w-full max-w-md bg-white border-r border-gray-200 transform ${
                     sidebarOpen ? "translate-x-0" : "-translate-x-full"
-                } transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex md:flex-col md:w-64`}
+                } transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex md:flex-col md:w-80 lg:w-96`}
             >
                 <div className="flex justify-between items-center p-4 md:hidden">
                     <Link
@@ -91,13 +91,13 @@ const Dashboard: FC<LayoutProps> = ({
                         style={{ filter: "invert(1)" }}
                     />
                 </Link>
-                {friends.length >= 0 && (
-                    <div className="text-xs font-semibold leading-6 text-gray-400 px-4">
-                        Your chats
-                    </div>
-                )}
 
                 <nav className="flex flex-1 flex-col overflow-y-auto">
+                    {friends.length > 0 && (
+                        <div className="text-xs font-semibold leading-6 text-gray-400 px-4">
+                            Your chats
+                        </div>
+                    )}
                     <ul
                         role="list"
                         className="flex flex-1 flex-col gap-y-3 px-4"
@@ -152,34 +152,35 @@ const Dashboard: FC<LayoutProps> = ({
                                 </li>
                             </ul>
                         </li>
-                        <li className="-mx-6 mt-auto flex items-center">
-                            <div className="flex flex-1 items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900">
-                                <div className="relative h-10 w-10 bg-gray-50">
-                                    <Image
-                                        fill
-                                        referrerPolicy="no-referrer"
-                                        className="rounded-full"
-                                        src={session.user.image || ""}
-                                        alt="Your profile picture"
-                                    />
-                                </div>
-                                <span className="sr-only">Your profile</span>
-                                <div className="flex flex-col">
-                                    <span aria-hidden="true">
-                                        {session.user.name}
-                                    </span>
-                                    <span
-                                        className="text-xs text-zinc-400"
-                                        aria-hidden="true"
-                                    >
-                                        {session.user.email}
-                                    </span>
-                                </div>
-                                <SignOutButton className="h-full aspect-square" />
-                            </div>
-                        </li>
                     </ul>
                 </nav>
+
+                {/* User profile and sign out button */}
+                <div className="px-6 py-3 border-t border-gray-200">
+                    <div className="flex items-center gap-x-4 text-sm font-semibold leading-6 text-gray-900">
+                        <div className="relative h-10 w-10 bg-gray-50">
+                            <Image
+                                fill
+                                referrerPolicy="no-referrer"
+                                className="rounded-full"
+                                src={session.user.image || ""}
+                                alt="Your profile picture"
+                            />
+                        </div>
+                        <div className="flex flex-col">
+                            <span aria-hidden="true">{session.user.name}</span>
+                            <span
+                                className="text-xs text-zinc-400"
+                                aria-hidden="true"
+                            >
+                                {session.user.email}
+                            </span>
+                        </div>
+                    </div>
+                    <div className="mt-3">
+                        <SignOutButton className="w-full py-2 text-center text-sm font-semibold text-gray-900 bg-gray-100 rounded-md hover:bg-gray-200" />
+                    </div>
+                </div>
             </div>
         </>
     );
