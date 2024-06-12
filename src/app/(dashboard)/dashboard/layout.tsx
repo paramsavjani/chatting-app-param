@@ -98,7 +98,7 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
                                         {session.user.email}
                                     </span>
                                 </div>
-                                     <SignOutButton className="h-full aspect-square" />
+                                <SignOutButton className="h-full aspect-square" />
                             </div>
                         </li>
                     </ul>
