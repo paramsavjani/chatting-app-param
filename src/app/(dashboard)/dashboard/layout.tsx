@@ -37,7 +37,7 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
     ).length;
 
     return (
-        <div className="flex">
+        <div className="flex h-dvh">
             <Dasboard
                 unseenRequestCount={unseenRequestCount}
                 friends={friends}
