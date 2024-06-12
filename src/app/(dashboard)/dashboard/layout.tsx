@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 import { notFound } from "next/navigation";
 import { FC, ReactNode } from "react";
 import Image from "next/image";
+import SignOutButton from "@/components/SignOutButton";
 
 // Optional: add page metadata
 export const metadata = {
@@ -96,6 +97,7 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
                                     >
                                         {session.user.email}
                                     </span>
+                                     <SignOutButton className="h-full aspect-square" />
                                 </div>
                             </div>
                         </li>
