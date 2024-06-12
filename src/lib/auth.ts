@@ -35,9 +35,7 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         async jwt({ token, user }) {
             try {
-                const dbUserResult = (await db.get(`user:${token.id}`)) as
-                    | string
-                    | null;
+                const dbUserResult = (await db.get(`user:${token.id}`)) as User;
 
                 if (!dbUserResult) {
                     if (user) {
@@ -46,14 +44,12 @@ export const authOptions: NextAuthOptions = {
                     return token;
                 }
 
-                const dbUser = JSON.parse(dbUserResult);
-
                 return {
                     ...token,
-                    id: dbUser.id,
-                    name: dbUser.name,
-                    email: dbUser.email,
-                    picture: dbUser.image,
+                    id: dbUserResult.id,
+                    name: dbUserResult.name,
+                    email: dbUserResult.email,
+                    picture: dbUserResult.image,
                 };
             } catch (error) {
                 console.error("JWT callback error:", error);
