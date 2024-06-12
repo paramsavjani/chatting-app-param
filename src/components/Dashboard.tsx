@@ -30,7 +30,7 @@ const Dashboard: FC<LayoutProps> = ({
     return (
         <>
             {/* Mobile menu button */}
-            <div className="md:hidden p-4">
+            <div className="md:hidden p-4 flex">
                 <button
                     onClick={() => setSidebarOpen(true)}
                     className="text-gray-700 hover:text-indigo-600"
