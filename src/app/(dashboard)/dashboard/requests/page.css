@@ -1,16 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
-:root {
-    --primary-color: #4f46e5;
-    --secondary-color: #4338ca;
-    --error-color: #dc2626;
-    --error-hover-color: #b91c1c;
-    --text-color: #333;
-    --light-text-color: #71717a;
-    --background-color: #ffffff;
-    --border-color: #e0e0e0;
-    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+@import url('https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap');
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -32,6 +21,7 @@ body {
     font-weight: 700;
     margin-bottom: 2rem;
     color: var(--primary-color);
+    font-family: "Spicy Rice", serif;
     text-align: center;
 }
 

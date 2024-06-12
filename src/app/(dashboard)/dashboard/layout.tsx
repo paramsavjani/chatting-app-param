@@ -35,8 +35,8 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
     ).length;
 
     return (
-        <div className="w-full flex h-screen overflow-hidden">
-            <div className="flex h-full overflow-hidden max-w-xs flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white">
+        <div className="w-full flex h-screen overflow-hidden ">
+            <div className="hidden flex h-full overflow-hidden max-w-xs flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white">
                 <Link href="/dashboard" className="items-center justify-center">
                     <Image
                         src="/svg-for-app.svg"
