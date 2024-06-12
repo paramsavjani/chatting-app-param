@@ -34,7 +34,6 @@ const AddFriendButton: FC<AddFriendButtonProps> = () => {
             await axios.post("/api/friends/add", { email: validatedEmail });
 
             setShowSuccessState(true);
-            setError("email", { message: "" });
             setTimeout(() => {
                 setShowSuccessState(false);
             }, 3500);
@@ -83,7 +82,7 @@ const AddFriendButton: FC<AddFriendButtonProps> = () => {
                             </Button>
                         </div>
                         <p className="error-message">
-                            {errors.email && (
+                            {errors.email?.message && (
                                 <i className="fas fa-exclamation-circle icon"></i>
                             )}
                             {errors.email?.message}
