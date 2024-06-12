@@ -7,8 +7,9 @@ import { notFound } from "next/navigation";
 import { FC, ReactNode } from "react";
 import Image from "next/image";
 import SignOutButton from "@/components/SignOutButton";
+import FriendRequestSidebarOptions from "@/components/FriendRequestSidebarOptions";
+import { fetchRedis } from "@/helpers/redis";
 
-// Optional: add page metadata
 export const metadata = {
     title: "ChatterSphere | Dashboard",
     description: "Your dashboard",
@@ -26,18 +27,22 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
 
     const friends = await getFriendsByUserId(session.user.id);
 
+    const unseenRequestCount = (
+        (await fetchRedis(
+            "smembers",
+            `user:${session.user.id}:incoming_friend_requests`
+        )) as User[]
+    ).length;
+
     return (
         <div className="w-full flex h-screen overflow-hidden">
             <div className="flex h-full overflow-hidden max-w-xs flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white">
-                <Link
-                    href="/dashboard"
-                    className="invert(1) items-center justify-center"
-                >
+                <Link href="/dashboard" className="items-center justify-center">
                     <Image
                         src="/svg-for-app.svg"
                         alt="ChatterSphere"
-                        width={600}
-                        height={600}
+                        width={100}
+                        height={100}
                         style={{ filter: "invert(1)" }}
                     />
                 </Link>
@@ -72,7 +77,14 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
                                         </span>
                                     </Link>
                                 </li>
-                                <li>(your incoming requests)</li>
+                                <li>
+                                    <FriendRequestSidebarOptions
+                                        sessionId={session.user.id}
+                                        initialUnseenRequestCount={
+                                            unseenRequestCount
+                                        }
+                                    />
+                                </li>
                             </ul>
                         </li>
                         <li className="-mx-6 mt-auto flex items-center">
