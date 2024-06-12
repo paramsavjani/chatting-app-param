@@ -1,3 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #4f46e5;
+    --secondary-color: #4338ca;
+    --error-color: #dc2626;
+    --error-hover-color: #b91c1c;
+    --text-color: #333;
+    --light-text-color: #71717a;
+    --background-color: #ffffff;
+    --border-color: #e0e0e0;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.no-requests-message {
+    font-size: 0.875rem;
+    color: var(--light-text-color);
+    text-align: center;
+    padding: 16px;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.request-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    padding: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--box-shadow);
+    animation: fadeInUp 0.6s ease-out;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.request-container:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-5px);
+}
+
+.profile-image {
+    border-radius: 50%;
+}
+
+.sender-info {
+    flex: 1;
+    text-align: center;
+}
+
+.sender-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.sender-email {
+    font-size: 0.875rem;
+    color: var(--light-text-color);
+}
+
+.buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.button {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button.accept {
+    background-color: var(--primary-color);
+}
+
+.button.accept:hover {
+    background-color: var(--secondary-color);
+    animation: buttonPulse 0.6s infinite;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button.deny {
+    background-color: var(--error-color);
+}
+
+.button.deny:hover {
+    background-color: var(--error-hover-color);
+    animation: buttonPulse 0.6s infinite;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button svg {
+    color: white;
+    width: 75%;
+    height: 75%;
+}
+
 @keyframes fadeInUp {
     0% {
         opacity: 0;
@@ -24,70 +134,19 @@
     }
 }
 
-.request-container {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    padding: 16px;
-    border-bottom: 1px solid #e0e0e0;
-    animation: fadeInUp 0.6s ease-out;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
+/* Responsive Design */
+@media (min-width: 768px) {
+    .request-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-.request-container:hover {
-    background-color: #f9f9f9;
-    transform: translateY(-5px);
-}
+    .sender-info {
+        text-align: left;
+    }
 
-.profile-image {
-    border-radius: 50%;
-}
-
-.sender-email {
-    font-size: 1.125rem;
-    font-weight: 500;
-    flex: 1;
-}
-
-.button {
-    width: 32px;
-    height: 32px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.button.accept {
-    background-color: #4f46e5;
-}
-
-.button.accept:hover {
-    background-color: #4338ca;
-    animation: buttonPulse 0.6s infinite;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.button.deny {
-    background-color: #dc2626;
-}
-
-.button.deny:hover {
-    background-color: #b91c1c;
-    animation: buttonPulse 0.6s infinite;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.button svg {
-    color: white;
-    width: 75%;
-    height: 75%;
-}
-
-.no-requests-message {
-    font-size: 0.875rem;
-    color: #71717a;
-    text-align: center;
-    padding: 16px;
-    animation: fadeInUp 0.6s ease-out;
+    .buttons {
+        gap: 16px;
+    }
 }

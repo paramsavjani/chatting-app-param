@@ -4,8 +4,9 @@ import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { notFound } from "next/navigation";
 import { FC } from "react";
+import "./page.css"; // Import the CSS file for this page
 
-const page = async () => {
+const Page: FC = async () => {
     const session = await getServerSession(authOptions);
     if (!session) notFound();
 
@@ -17,22 +18,25 @@ const page = async () => {
 
     const incomingFriendRequests = await Promise.all(
         incomingSenderIds.map(async (senderId) => {
-            const sender = (await fetchRedis("get", `user:${senderId}`)) as
-                | string;
-             const senderParsed = JSON.parse(sender) as User;
+            const sender = (await fetchRedis(
+                "get",
+                `user:${senderId}`
+            )) as string;
+            const senderParsed = JSON.parse(sender) as User;
 
             return {
-                senderId,
+                senderId: senderParsed?.id,
                 senderEmail: senderParsed?.email,
                 senderImage: senderParsed?.image,
+                senderName: senderParsed?.name,
             };
         })
     );
 
     return (
-        <main className="pt-8">
-            <h1 className="font-bold text-5xl mb-8">Add a friend</h1>
-            <div className="flex flex-col gap-4">
+        <main className="main-container">
+            <h1 className="page-title">Add a friend</h1>
+            <div className="friend-requests-container">
                 <FriendRequests
                     incomingFriendRequests={incomingFriendRequests}
                     sessionId={session.user.id}
@@ -42,4 +46,4 @@ const page = async () => {
     );
 };
 
-export default page;
+export default Page;

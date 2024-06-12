@@ -77,7 +77,7 @@ const AddFriendButton: FC<AddFriendButtonProps> = () => {
                                 }`}
                                 placeholder="you@example.com"
                             />
-                            <Button disabled={loading} className="button">
+                            <Button disabled={loading} className="button-add">
                                 {loading ? "Adding..." : "Add"}
                             </Button>
                         </div>

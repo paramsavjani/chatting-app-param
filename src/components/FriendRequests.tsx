@@ -67,21 +67,28 @@ const FriendRequests: FC<FriendRequestsProps> = ({
                             src={request.senderImage || ""}
                             alt="Profile picture"
                         />
-                        <p className="sender-email">{request.senderEmail}</p>
-                        <button
-                            onClick={() => handleAccept(request.senderId)}
-                            aria-label="accept friend"
-                            className="button accept"
-                        >
-                            <Check />
-                        </button>
-                        <button
-                            onClick={() => handleDeny(request.senderId)}
-                            aria-label="deny friend"
-                            className="button deny"
-                        >
-                            <X />
-                        </button>
+                        <div className="sender-info">
+                            <p className="sender-name">{request.senderName}</p>
+                            <p className="sender-email">
+                                {request.senderEmail}
+                            </p>
+                        </div>
+                        <div className="buttons">
+                            <button
+                                onClick={() => handleAccept(request.senderId)}
+                                aria-label="accept friend"
+                                className="button accept"
+                            >
+                                <Check />
+                            </button>
+                            <button
+                                onClick={() => handleDeny(request.senderId)}
+                                aria-label="deny friend"
+                                className="button deny"
+                            >
+                                <X />
+                            </button>
+                        </div>
                     </div>
                 ))
             )}
