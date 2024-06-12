@@ -15,9 +15,8 @@ const Layout = async ({ children }: LayoutProps) => {
 
     return (
         <div className="w-full h-screen flex ">
-            <div className="flex h-full w-full max-w-xs grow flex-col gap-y-5 overflow-y-auto border-gray-200 bg-white">
-            </div>
-                {children}
+            <div className="flex h-full w-full max-w-xs grow flex-col gap-y-5 overflow-y-auto border-gray-200 bg-white"></div>
+            {children}
         </div>
     );
 };
