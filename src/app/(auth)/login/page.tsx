@@ -1,4 +1,4 @@
-"use client";
+// pages/login.tsx
 
 import { FC, useState } from "react";
 import { signIn } from "next-auth/react";
@@ -7,12 +7,16 @@ import Image from "next/image";
 import "./login.css";
 
 const Page: FC = () => {
-    const [isLoading, setIsLoading] = useState<boolean[]>([]);
+    const [isLoading, setIsLoading] = useState<[boolean, boolean]>([
+        false,
+        false,
+    ]);
 
     async function loginWithGoogle() {
         setIsLoading([true, isLoading[1]]);
         try {
             await signIn("google");
+            triggerFullscreen();
         } catch (error) {
             toast.error("Something went wrong with your login.");
         } finally {
@@ -24,10 +28,30 @@ const Page: FC = () => {
         setIsLoading([isLoading[0], true]);
         try {
             await signIn("github");
+            triggerFullscreen();
         } catch (error) {
             toast.error("Something went wrong with your login.");
         } finally {
             setTimeout(() => setIsLoading([isLoading[0], false]), 2000);
+        }
+    }
+
+    function triggerFullscreen() {
+        const element = document.documentElement;
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+            // @ts-ignore
+        } else if (element.mozRequestFullScreen) {
+            // @ts-ignore
+            element.mozRequestFullScreen(); // Firefox
+            // @ts-ignore
+        } else if (element.webkitRequestFullscreen) {
+            // @ts-ignore
+            element.webkitRequestFullscreen(); // Chrome and Safari
+            // @ts-ignore
+        } else if (element.msRequestFullscreen) {
+            // @ts-ignore
+            element.msRequestFullscreen();
         }
     }
 
@@ -105,7 +129,6 @@ const Page: FC = () => {
                             alt="GitHub Icon"
                             className="button-icon"
                         />
-                      
                         Sign in with GitHub
                     </>
                 )}
