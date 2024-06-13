@@ -21,17 +21,17 @@ export async function POST(req: Request) {
             return new Response("Unauthorized", { status: 401 });
         }
 
-        const friendId = session.user.id === userId1 ? userId2 : userId1;
+        // const friendId = session.user.id === userId1 ? userId2 : userId1;
 
-        const friendList = (await fetchRedis(
-            "smembers",
-            `user:${session.user.id}:friends`
-        )) as string[];
-        const isFriend = friendList.includes(friendId);
+        // const friendList = (await fetchRedis(
+        //     "smembers",
+        //     `user:${session.user.id}:friends`
+        // )) as string[];
+        // const isFriend = friendList.includes(friendId);
 
-        if (!isFriend) {
-            return new Response("Unauthorized", { status: 401 });
-        }
+        // if (!isFriend) {
+        //     return new Response("Unauthorized", { status: 401 });
+        // }
 
         const timestamp = Date.now();
 
