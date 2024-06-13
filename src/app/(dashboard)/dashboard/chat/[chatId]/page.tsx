@@ -76,7 +76,7 @@ const Page = async ({ params }: pageProps) => {
 
                     <div className="flex flex-col leading-tight">
                         <div className="text-lg flex items-center">
-                            <span className="text-gray-800 font-bold truncate w-20 sm:w-auto">
+                            <span className="text-gray-800 font-bold  w-auto">
                                 {chatPartner.name}
                             </span>
                         </div>
