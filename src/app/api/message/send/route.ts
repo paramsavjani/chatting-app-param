@@ -4,6 +4,8 @@ import { getServerSession } from "next-auth";
 import { db } from "@/lib/db";
 import { Message, messageValidator } from "@/lib/validation/message";
 import { nanoid } from "nanoid";
+import { pusherServer } from "@/lib/pusher";
+import { toPusherKey } from "@/lib/utils";
 
 export async function POST(req: Request) {
     try {
@@ -31,12 +33,6 @@ export async function POST(req: Request) {
             return new Response("Unauthorized", { status: 401 });
         }
 
-        const rawSender = (await fetchRedis(
-            "get",
-            `user:${session.user.id}`
-        )) as string;
-        const sender = JSON.parse(rawSender) as User;
-
         const timestamp = Date.now();
 
         const messageData: Message = {
@@ -47,6 +43,13 @@ export async function POST(req: Request) {
         };
 
         const message = messageValidator.parse(messageData);
+
+        await pusherServer.trigger(
+            toPusherKey(`chat:${chatId}`),
+            "incoming-message",
+            message
+        );
+
         await db.zadd(`chat:${chatId}:messages`, {
             score: timestamp,
             member: JSON.stringify(message),
@@ -61,5 +64,3 @@ export async function POST(req: Request) {
         return new Response("Internal Server Error", { status: 501 });
     }
 }
-
-
