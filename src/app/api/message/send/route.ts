@@ -21,7 +21,7 @@ export async function POST(req: Request) {
             return new Response("Unauthorized", { status: 401 });
         }
 
-        // const friendId = session.user.id === userId1 ? userId2 : userId1;
+        const friendId = session.user.id === userId1 ? userId2 : userId1;
 
         // const friendList = (await fetchRedis(
         //     "smembers",
@@ -48,6 +48,22 @@ export async function POST(req: Request) {
             toPusherKey(`chat:${chatId}`),
             "incoming-message",
             message
+        );
+
+        const rawSender = (await fetchRedis(
+            "get",
+            `user:${session.user.id}`
+        )) as string;
+        const sender = JSON.parse(rawSender) as User;
+
+        await pusherServer.trigger(
+            toPusherKey(`user:${friendId}:chats`),
+            "new_message",
+            {
+                ...message,
+                senderImg: sender.image,
+                senderName: sender.name,
+            }
         );
 
         await db.zadd(`chat:${chatId}:messages`, {

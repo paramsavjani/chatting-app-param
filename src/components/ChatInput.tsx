@@ -53,7 +53,7 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
                     onChange={(e) => setInput(e.target.value)}
                     placeholder={`Type a message`}
                     className="w-full h-10 px-3 py-2 text-sm border border-gray-400 rounded-lg outline-none resize-none"
-                />
+                />  
             </div>
             <div className="flex-shrink-0">
                 <Button
