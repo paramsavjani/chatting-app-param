@@ -108,7 +108,7 @@ const SlidebarChatList: FC<SlidebarChatListProps> = ({
                             </div>
                             <span className="truncate">{friend.name}</span>
                             {unseeenMessagesCount > 0 ? (
-                                <div className="bg-indigo-600 font-medium text-xs text-white w-5 h-5 rounded-full flex justify-center items-center">
+                                <div className="bg-indigo-600 font-medium text-xs text-white w-6 h-6 rounded-full flex justify-center items-center">
                                     {unseeenMessagesCount}
                                 </div>
                             ) : null}

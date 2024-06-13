@@ -24,7 +24,7 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
             
             textareaRef.current?.focus();
             setInput(""); // Clear input after sending
-            await axios.post(`/api/message/send`, {
+            axios.post(`/api/message/send`, {
                 text: input,
                 chatId
             }); 
