@@ -1,10 +1,12 @@
 "use client";
 
-import { Message } from "@/lib/validation/message";
 import { FC, useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import { Message } from "@/lib/validation/message";
+// import { User } from "@/lib/types/user"; // Assuming User type is defined here
+
 interface MessagesProps {
     initialMessages: Message[];
     sessionId: string;
@@ -40,21 +42,46 @@ const Messages: FC<MessagesProps> = ({
 
             {messages.map((message, index) => {
                 const isCurrentUser = message.senderId === sessionId;
-                const hasNextMessageFromSameUser = messages[index - 1]?.senderId === messages[index].senderId;
+                const hasNextMessageFromSameUser =
+                    messages[index - 1]?.senderId === messages[index].senderId;
 
                 return (
-                    <div className="chat-message" key={`${message.id}-${message.timestamp}`}>
-                        <div className={cn("flex items-end", { "justify-end": isCurrentUser })}>
-                            <div className={cn("flex flex-col space-y-2 text-sm max-w-xs mx-2 md:max-w-md lg:max-w-lg", {
-                                "order-1 items-end": isCurrentUser,
-                                "order-2 items-start": !isCurrentUser,
-                            })}>
-                                <span className={cn("px-4 py-2 rounded-2xl inline-block", {
-                                    "bg-indigo-600 text-white": isCurrentUser,
-                                    "bg-gray-200 text-gray-900": !isCurrentUser,
-                                    "rounded-br-none": !hasNextMessageFromSameUser && isCurrentUser,
-                                    "rounded-bl-none": !hasNextMessageFromSameUser && !isCurrentUser,
-                                })}>
+                    <div
+                        className="chat-message transition-transform duration-300 ease-in-out"
+                        key={`${message.id}-${message.timestamp}`}
+                        style={{ transform: "translateY(0)" }}
+                    >
+                        <div
+                            className={cn("flex items-end", {
+                                "justify-end": isCurrentUser,
+                            })}
+                        >
+                            <div
+                                className={cn(
+                                    "flex flex-col space-y-1 text-sm max-w-xs mx-2 md:max-w-md lg:max-w-lg",
+                                    {
+                                        "order-1 items-end": isCurrentUser,
+                                        "order-2 items-start": !isCurrentUser,
+                                    }
+                                )}
+                            >
+                                <span
+                                    className={cn(
+                                        "px-4 py-2 rounded-2xl inline-block",
+                                        {
+                                            "bg-indigo-600 text-white":
+                                                isCurrentUser,
+                                            "bg-gray-200 text-gray-900":
+                                                !isCurrentUser,
+                                            "rounded-br-none":
+                                                !hasNextMessageFromSameUser &&
+                                                isCurrentUser,
+                                            "rounded-bl-none":
+                                                !hasNextMessageFromSameUser &&
+                                                !isCurrentUser,
+                                        }
+                                    )}
+                                >
                                     {message.text}
                                     <span className="ml-2 text-xs text-gray-400">
                                         {formatTimestamp(message.timestamp)}
@@ -62,17 +89,26 @@ const Messages: FC<MessagesProps> = ({
                                 </span>
                             </div>
 
-                            <div className={cn("relative w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12", {
-                                "order-2": isCurrentUser,
-                                "order-1": !isCurrentUser,
-                                "invisible": hasNextMessageFromSameUser,
-                            })}>
+                            <div
+                                className={cn(
+                                    "relative w-8 h-8 md:w-8 md:h-8 lg:w-8 lg:h-8",
+                                    {
+                                        "order-2": isCurrentUser,
+                                        "order-1": !isCurrentUser,
+                                        invisible: hasNextMessageFromSameUser,
+                                    }
+                                )}
+                            >
                                 <Image
                                     fill
-                                    src={isCurrentUser ? (sessionImg as string) : chatPartner.image}
+                                    src={
+                                        isCurrentUser
+                                            ? (sessionImg as string)
+                                            : chatPartner.image
+                                    }
                                     alt="Profile picture"
                                     referrerPolicy="no-referrer"
-                                    className="rounded-full"
+                                    className="rounded-full transition-transform duration-200 hover:scale-105"
                                 />
                             </div>
                         </div>
