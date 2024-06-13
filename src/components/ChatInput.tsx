@@ -21,11 +21,13 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
         setIsLoading(true);
 
         try {
-            // Simulate sending message with a delay (remove this in production)
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-
-            toast.success("Message sent successfully.");
+            
             setInput(""); // Clear input after sending
+            await axios.post(`/api/message/send`, {
+                text: input,
+                chatId
+            }); 
+
             textareaRef.current?.focus();
         } catch (error) {
             console.error("Error sending message:", error);
