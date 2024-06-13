@@ -41,7 +41,7 @@ const Dashboard: FC<LayoutProps> = ({
 
             {/* Sidebar */}
             <div
-                className={`fixed inset-y-0 left-0 z-50 w-full max-w-md bg-white border-r border-gray-200 transform ${
+                className={`flex flex-col fixed inset-y-0 left-0 z-50 w-full max-w-md bg-white border-r border-gray-200 transform ${
                     sidebarOpen ? "translate-x-0" : "-translate-x-full"
                 } transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex md:flex-col md:w-80 lg:w-96`}
             >
