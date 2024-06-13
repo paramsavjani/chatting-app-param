@@ -61,7 +61,7 @@ const Page = async ({ params }: pageProps) => {
     const initialMessages = await getChatMessages(chatId);
 
     return (
-        <div className="flex flex-col h-screen bg-gradient-to-b from-gray-100 to-gray-200">
+        <div className="flex flex-col max-h-[calc(100vh-6rem)] bg-gradient-to-b from-gray-100 to-gray-200">
             <div className="flex items-center justify-between py-2 sm:py-3 border-b-2 border-gray-200 shadow-md bg-white">
                 <div className="flex items-center space-x-3 sm:space-x-4 px-3 sm:px-4">
                     <div className="relative w-10 h-10">

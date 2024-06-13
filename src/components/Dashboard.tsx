@@ -30,8 +30,18 @@ const Dashboard: FC<LayoutProps> = ({
 
     return (
         <>
-            {/* Mobile menu button */}
-            <div className="md:hidden px-4 py-3 pb-0 pt-3 inline-block">
+            {/* Mobile header */}
+            <div className="md:hidden px-4 py-3 pb-3 pt-3 flex items-center justify-between">
+                <div className="flex items-center">
+                    <Image
+                        src="/svg-for-app.svg"
+                        alt="ChatterSphere"
+                        width={40}
+                        height={40}
+                        style={{ filter: "invert(1)" }}
+                    />
+                    <span className="text-xl font-semibold ml-2">ChatterSphere</span>
+                </div>
                 <button
                     onClick={() => setSidebarOpen(true)}
                     className="text-gray-700 hover:text-indigo-600"
@@ -42,9 +52,9 @@ const Dashboard: FC<LayoutProps> = ({
 
             {/* Sidebar */}
             <div
-                className={`flex flex-col fixed inset-y-0 left-0 z-50 w-full max-w-md bg-white border-r border-gray-200 transform ${
-                    sidebarOpen ? "translate-x-0" : "-translate-x-full"
-                } transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex md:flex-col md:w-80 lg:w-96`}
+                className={`flex flex-col fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white border-l border-gray-200 transform ${
+                    sidebarOpen ? "translate-x-0" : "translate-x-full"
+                } transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex md:flex-col md:w-80 lg:w-96 md:left-0 md:border-r md:border-l-0`}
             >
                 <div className="flex justify-between items-center p-4 md:hidden">
                     <Link
