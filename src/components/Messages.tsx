@@ -5,7 +5,6 @@ import Image from "next/image";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Message } from "@/lib/validation/message";
-// import { User } from "@/lib/types/user"; // Assuming User type is defined here
 
 interface MessagesProps {
     initialMessages: Message[];
