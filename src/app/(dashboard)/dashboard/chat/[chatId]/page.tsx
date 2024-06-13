@@ -92,7 +92,7 @@ const Page = async ({ params }: pageProps) => {
                 </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto relative">
+            <div className="flex-1 overflow-y-auto bg-white relative">
                 <Messages
                     chatId={chatId}
                     initialMessages={initialMessages}
