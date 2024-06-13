@@ -94,6 +94,7 @@ export async function POST(req: Request) {
         if (error instanceof z.ZodError) {
             return new Response("Invalid request payload", { status: 422 });
         }
+        console.log(error)
         return new Response("Something went wrong", { status: 400 });
     }
 }
