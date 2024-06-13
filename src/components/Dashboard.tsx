@@ -31,7 +31,7 @@ const Dashboard: FC<LayoutProps> = ({
     return (
         <>
             {/* Mobile menu button */}
-            <div className="md:hidden p-4 inline-block">
+            <div className="md:hidden px-4 py-3 pb-0 pt-3 inline-block">
                 <button
                     onClick={() => setSidebarOpen(true)}
                     className="text-gray-700 hover:text-indigo-600"
