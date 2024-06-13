@@ -8,6 +8,7 @@ import { Session } from "next-auth";
 import SignOutButton from "./SignOutButton";
 import { FC } from "react";
 import { usePathname } from "next/navigation";
+import SidebarChatList from "@/components/SlidebarChatList";
 
 interface LayoutProps {
     unseenRequestCount: number;
@@ -102,27 +103,11 @@ const Dashboard: FC<LayoutProps> = ({
                         role="list"
                         className="flex flex-1 flex-col gap-y-3 px-4"
                     >
-                        {friends.map((friend) => (
-                            <li key={friend.id}>
-                                <Link
-                                    href={`/dashboard/chat/${friend.id}`}
-                                    className="flex gap-3 items-center text-gray-700 hover:text-indigo-700 hover:bg-gray-50 group rounded-md p-1 text-sm font-semibold leading-6"
-                                >
-                                    <div className="relative h-10 w-10 bg-gray-50">
-                                        <Image
-                                            fill
-                                            referrerPolicy="no-referrer"
-                                            className="rounded-full"
-                                            src={friend.image || ""}
-                                            alt="Friend's profile picture"
-                                        />
-                                    </div>
-                                    <span className="truncate">
-                                        {friend.name}
-                                    </span>
-                                </Link>
-                            </li>
-                        ))}
+                        <SidebarChatList
+                            sessionId={session.user.id}
+                            friends={friends}
+                        />
+
                         <li>
                             <div className="text-xs font-semibold leading-6 text-gray-400">
                                 Overview
