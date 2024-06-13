@@ -34,7 +34,7 @@ const Messages: FC<MessagesProps> = ({
     return (
         <div
             id="messages"
-            className="flex h-full flex-1 flex-col-reverse gap-3 p-4 pb-0 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
+            className="flex h-full flex-1 flex-col-reverse gap-0.5 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
         >
             <div ref={scrollDownRef} />
 
@@ -45,11 +45,11 @@ const Messages: FC<MessagesProps> = ({
                 return (
                     <div className="chat-message" key={`${message.id}-${message.timestamp}`}>
                         <div className={cn("flex items-end", { "justify-end": isCurrentUser })}>
-                            <div className={cn("flex flex-col space-y-2 text-sm max-w-xs mx-2", {
+                            <div className={cn("flex flex-col space-y-2 text-sm max-w-xs mx-2 md:max-w-md lg:max-w-lg", {
                                 "order-1 items-end": isCurrentUser,
                                 "order-2 items-start": !isCurrentUser,
                             })}>
-                                <span className={cn("px-4 py-2 rounded-lg inline-block", {
+                                <span className={cn("px-4 py-2 rounded-2xl inline-block", {
                                     "bg-indigo-600 text-white": isCurrentUser,
                                     "bg-gray-200 text-gray-900": !isCurrentUser,
                                     "rounded-br-none": !hasNextMessageFromSameUser && isCurrentUser,
@@ -62,7 +62,7 @@ const Messages: FC<MessagesProps> = ({
                                 </span>
                             </div>
 
-                            <div className={cn("relative w-8 h-8", {
+                            <div className={cn("relative w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12", {
                                 "order-2": isCurrentUser,
                                 "order-1": !isCurrentUser,
                                 "invisible": hasNextMessageFromSameUser,
