@@ -106,7 +106,7 @@ const Dashboard: FC<LayoutProps> = ({
                             <li key={friend.id}>
                                 <Link
                                     href={`/dashboard/chat/${friend.id}`}
-                                    className="flex gap-3 items-center text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group rounded-md p-1 text-sm font-semibold leading-6"
+                                    className="flex gap-3 items-center text-gray-700 hover:text-indigo-700 hover:bg-gray-50 group rounded-md p-1 text-sm font-semibold leading-6"
                                 >
                                     <div className="relative h-10 w-10 bg-gray-50">
                                         <Image
