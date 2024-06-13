@@ -4,6 +4,7 @@ import { messageArrayValidator } from "@/lib/validation/message";
 import { getServerSession } from "next-auth";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import ChatInput from "@/components/ChatInput";
 
 interface pageProps {
     params: {
@@ -33,7 +34,7 @@ async function getChatMessages(chatId: string) {
     }
 }
 
-const page = async ({ params }: pageProps) => {
+const Page = async ({ params }: pageProps) => {
     const { chatId } = params;
     const session = await getServerSession(authOptions);
     if (!session) {
@@ -60,24 +61,22 @@ const page = async ({ params }: pageProps) => {
     const initialMessages = await getChatMessages(chatId);
 
     return (
-        <div className="flex-1 justify-between flex flex-col h-full max-h-[calc(100vh-6rem)] bg-gradient-to-b from-gray-100 to-gray-200">
-            <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200 shadow-md bg-white">
-                <div className="relative flex items-center space-x-4 px-4">
-                    <div className="relative">
-                        <div className="relative w-10 sm:w-14 h-10 sm:h-14">
-                            <Image
-                                fill
-                                referrerPolicy="no-referrer"
-                                src={chatPartner.image}
-                                alt={`${chatPartner.name} profile picture`}
-                                className="rounded-full border-2 border-gray-300 shadow-lg"
-                            />
-                        </div>
+        <div className="flex flex-col h-screen bg-gradient-to-b from-gray-100 to-gray-200">
+            <div className="flex items-center justify-between py-2 sm:py-3 border-b-2 border-gray-200 shadow-md bg-white">
+                <div className="flex items-center space-x-3 sm:space-x-4 px-3 sm:px-4">
+                    <div className="relative w-10 h-10">
+                        <Image
+                            src={chatPartner.image}
+                            alt={`${chatPartner.name} profile picture`}
+                            className="rounded-full border-2 border-gray-300"
+                            width={40}
+                            height={40}
+                        />
                     </div>
 
                     <div className="flex flex-col leading-tight">
-                        <div className="text-2xl flex items-center">
-                            <span className="text-gray-800 mr-3 font-bold">
+                        <div className="text-lg flex items-center">
+                            <span className="text-gray-800 font-bold truncate w-20 sm:w-auto">
                                 {chatPartner.name}
                             </span>
                         </div>
@@ -89,9 +88,18 @@ const page = async ({ params }: pageProps) => {
                 </div>
             </div>
 
-            
+            <div className="flex-1 overflow-y-auto relative">
+                {" "}
+                {/* This div will scroll messages */}
+                {/* Add Messages component here */}
+                {/* <Messages chatId={chatId} initialMessages={initialMessages} /> */}
+            </div>
+
+            {/* <div className="relative"> */}
+                <ChatInput chatId={chatId} chatPartner={chatPartner} />
+            {/* </div>   */}
         </div>
     );
 };
 
-export default page;
+export default Page;
