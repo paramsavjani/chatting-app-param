@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import axios from "axios";
 import { FC, useRef, useState } from "react";
@@ -18,23 +18,25 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
 
     const sendMessage = async () => {
         if (!input.trim()) return; // Prevent sending empty messages
+        textareaRef.current?.focus();
         setIsLoading(true);
+        textareaRef.current?.focus();
 
         try {
-            
             textareaRef.current?.focus();
             setInput(""); // Clear input after sending
-            axios.post(`/api/message/send`, {
+            await axios.post(`/api/message/send`, {
                 text: input,
-                chatId
-            }); 
-
+                chatId,
+            });
             textareaRef.current?.focus();
+            
         } catch (error) {
             console.error("Error sending message:", error);
             toast.error("Something went wrong. Please try again later.");
         } finally {
             setIsLoading(false);
+            textareaRef.current?.focus();
         }
     };
 
@@ -43,7 +45,7 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
             <div className="flex-grow mr-2">
                 <TextareaAutosize
                     ref={textareaRef}
-                    style={{ verticalAlign: "top",maxWidth: "100%"}}
+                    style={{ verticalAlign: "top", maxWidth: "100%" }}
                     onKeyDown={(e) => {
                         if (e.key === "Enter" && !e.shiftKey) {
                             e.preventDefault();
@@ -54,7 +56,7 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
                     onChange={(e) => setInput(e.target.value)}
                     placeholder={`Type a message`}
                     className="w-full h-10 px-3 py-2 text-sm border border-gray-400 rounded-lg outline-none resize-none"
-                />  
+                />
             </div>
             <div className="flex-shrink-0">
                 <Button
