@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import ChatInput from "@/components/ChatInput";
+import Messages from "@/components/Messages";
 
 interface pageProps {
     params: {
@@ -92,10 +93,13 @@ const Page = async ({ params }: pageProps) => {
             </div>
 
             <div className="flex-1 overflow-y-auto relative">
-                {" "}
-                {/* This div will scroll messages */}
-                {/* Add Messages component here */}
-                {/* <Messages chatId={chatId} initialMessages={initialMessages} /> */}
+                <Messages
+                    chatId={chatId}
+                    initialMessages={initialMessages}
+                    chatPartner={chatPartner}
+                    sessionId={session.user.id}
+                    sessionImg={session.user.image}
+                />
             </div>
 
             {/* <div className="relative"> */}
