@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import { FC, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import TextareaAutosize from "react-textarea-autosize";
 import Button from "./ui/Button";
@@ -11,11 +11,13 @@ interface ChatInputProps {
     chatId: string;
 }
 
-const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
+const ChatInput: FC<ChatInputProps> = ({chatId }) => {
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [input, setInput] = useState<string>("");
-
+    useEffect(() => {
+        textareaRef.current?.focus();
+    }, []);
     const sendMessage = async () => {
         if (!input.trim()) return; // Prevent sending empty messages
         textareaRef.current?.focus();
@@ -30,7 +32,6 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
                 chatId,
             });
             textareaRef.current?.focus();
-            
         } catch (error) {
             console.error("Error sending message:", error);
             toast.error("Something went wrong. Please try again later.");
