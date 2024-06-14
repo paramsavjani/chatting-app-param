@@ -19,7 +19,7 @@ export async function POST(req: Request) {
 
         if (!idToAdd) {
             return new Response(
-                "This person does have account in Chatter Sphere.",
+                "This person does not have account in Chatter Sphere.",
                 { status: 400 }
             );
         }
