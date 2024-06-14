@@ -28,6 +28,7 @@ const AddFriendButton: FC<AddFriendButtonProps> = () => {
 
     const addFriend = async (email: string) => {
         try {
+            email.toLowerCase();
             setLoading(true);
             const validatedEmail = AddFriendSchema.parse({ email });
 
