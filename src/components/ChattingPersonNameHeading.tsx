@@ -20,9 +20,9 @@ const ChattingPersonNameHeading: FC<ChattingPersonNameHeadingProps> = ({
 
     useEffect(() => {
         const channel = pusherClient.subscribe(toPusherKey(`chat-${chatId}`));
+        console.log("userid");
 
         channel.bind("typing", ({ userId }: { userId: string }) => {
-            console.log("userId");
             if (userId === chatPartner.id) {
                 setIsTyping(true);
                 if (typingTimeoutRef.current) {
@@ -40,7 +40,7 @@ const ChattingPersonNameHeading: FC<ChattingPersonNameHeadingProps> = ({
                 clearTimeout(typingTimeoutRef.current);
             }
         };
-    }, [chatId, chatPartner.id]);
+    }, []);
 
     return (
         <div className="flex items-center justify-between py-2 sm:py-3 border-b-2 border-gray-200 shadow-md bg-white">
@@ -61,10 +61,6 @@ const ChattingPersonNameHeading: FC<ChattingPersonNameHeadingProps> = ({
                             {chatPartner.name}
                         </span>
                     </div>
-
-                    <span className="text-sm text-gray-500">
-                        {chatPartner.email}
-                    </span>
 
                     {isTyping && (
                         <span className="text-sm text-gray-500">Typing...</span>
