@@ -30,7 +30,7 @@ const ChattingPersonNameHeading: FC<ChattingPersonNameHeadingProps> = ({
                 }
                 typingTimeoutRef.current = setTimeout(() => {
                     setIsTyping(false);
-                }, 3000); // Reset typing indicator after 3 seconds
+                }, 100); // Reset typing indicator after 3 seconds
             }
         });
 
