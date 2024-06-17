@@ -9,9 +9,10 @@ import Button from "./ui/Button";
 interface ChatInputProps {
     chatPartner: User;
     chatId: string;
+    userId: string;
 }
 
-const ChatInput: FC<ChatInputProps> = ({chatId }) => {
+const ChatInput: FC<ChatInputProps> = ({ chatId, chatPartner, userId }) => {
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [input, setInput] = useState<string>("");
@@ -19,14 +20,14 @@ const ChatInput: FC<ChatInputProps> = ({chatId }) => {
         textareaRef.current?.focus();
     }, []);
     const sendMessage = async () => {
-        if (!input.trim()) return; // Prevent sending empty messages
+        if (!input.trim()) return;
         textareaRef.current?.focus();
         setIsLoading(true);
         textareaRef.current?.focus();
 
         try {
             textareaRef.current?.focus();
-            setInput(""); // Clear input after sending
+            setInput("");
             await axios.post(`/api/message/send`, {
                 text: input,
                 chatId,
@@ -39,6 +40,15 @@ const ChatInput: FC<ChatInputProps> = ({chatId }) => {
             setIsLoading(false);
             textareaRef.current?.focus();
         }
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setInput(e.target.value);
+        // Notify the server that the user is typing
+        axios.post(`/api/message/typing`, {
+            chatId,
+            userId,
+        });
     };
 
     return (
@@ -54,7 +64,7 @@ const ChatInput: FC<ChatInputProps> = ({chatId }) => {
                         }
                     }}
                     value={input}
-                    onChange={(e) => setInput(e.target.value)}
+                    onChange={handleInputChange}
                     placeholder={`Type a message`}
                     className="w-full h-10 px-3 py-2 text-sm border border-gray-400 rounded-lg outline-none resize-none"
                 />

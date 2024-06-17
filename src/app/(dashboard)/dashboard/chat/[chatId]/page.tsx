@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import ChatInput from "@/components/ChatInput";
 import Messages from "@/components/Messages";
+import ChattingPersonNameHeading from "@/components/ChattingPersonNameHeading";
 
 interface pageProps {
     params: {
@@ -66,31 +67,7 @@ const Page = async ({ params }: pageProps) => {
             className="flex flex-col bg-gradient-to-b from-gray-100 to-gray-200 
              h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-3.5rem)] md:h-screen lg:h-screen xl:h-screen"
         >
-            <div className="flex items-center justify-between py-2 sm:py-3 border-b-2 border-gray-200 shadow-md bg-white">
-                <div className="flex items-center space-x-3 sm:space-x-4 px-3 sm:px-4">
-                    <div className="relative w-10 h-10">
-                        <Image
-                            src={chatPartner.image}
-                            alt={`${chatPartner.name} profile picture`}
-                            className="rounded-full border-2 border-gray-300"
-                            width={40}
-                            height={40}
-                        />
-                    </div>
-
-                    <div className="flex flex-col leading-tight">
-                        <div className="text-lg flex items-center">
-                            <span className="text-gray-800 font-bold  w-auto">
-                                {chatPartner.name}
-                            </span>
-                        </div>
-
-                        <span className="text-sm text-gray-500">
-                            {chatPartner.email}
-                        </span>
-                    </div>
-                </div>
-            </div>
+           <ChattingPersonNameHeading chatPartner={chatPartner} chatId={chatId} />
 
             <div className="flex-1 overflow-y-auto bg-white relative">
                 <Messages
@@ -103,7 +80,11 @@ const Page = async ({ params }: pageProps) => {
             </div>
 
             {/* <div className="relative"> */}
-            <ChatInput chatId={chatId} chatPartner={chatPartner} />
+            <ChatInput
+                chatId={chatId}
+                userId={session.user.id}
+                chatPartner={chatPartner}
+            />
             {/* </div>   */}
         </div>
     );
