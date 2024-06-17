@@ -30,7 +30,7 @@ const ChattingPersonNameHeading: FC<ChattingPersonNameHeadingProps> = ({
                 }
                 typingTimeoutRef.current = setTimeout(() => {
                     setIsTyping(false);
-                }, 100); // Reset typing indicator after 3 seconds
+                }, 500); // Reset typing indicator after 3 seconds
             }
         });
 
@@ -40,7 +40,7 @@ const ChattingPersonNameHeading: FC<ChattingPersonNameHeadingProps> = ({
                 clearTimeout(typingTimeoutRef.current);
             }
         };
-    }, []);
+    }, [chatId, chatPartner.id]);
 
     return (
         <div className="flex items-center justify-between py-2 sm:py-3 border-b-2 border-gray-200 shadow-md bg-white">
