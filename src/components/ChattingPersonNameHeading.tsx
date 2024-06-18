@@ -15,18 +15,19 @@ const ChattingPersonNameHeading: FC<ChattingPersonNameHeadingProps> = ({
     chatId,
 }) => {
     const [isTyping, setIsTyping] = useState<boolean>(false);
-    const [isOnline, setIsOnline] = useState<boolean>(false);
+    const isOnline = useRef<boolean>(false);
     const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
         const channel = pusherClient.subscribe(toPusherKey(`chat-${chatId}`));
-        const status = pusherClient.subscribe("status");
+        const status = pusherClient.subscribe(toPusherKey(`status`));
 
-        const handlestatus = ({ status }: { status: string }) => {
-            if (status === "online") {
-                setIsOnline(true);
-            } else {
-                setIsOnline(false);
+        const handlestatus = (data: string) => {
+            if (data === "online") {
+                isOnline.current = true;
+            }
+            if (data === "offline") {
+                isOnline.current = false;
             }
         };
 
@@ -71,14 +72,10 @@ const ChattingPersonNameHeading: FC<ChattingPersonNameHeadingProps> = ({
                     </span>
                     <span
                         className={cn("text-sm text-gray-500 mt-1", {
-                            "text-white": !isTyping,
+                        
                         })}
                     >
-                        {isTyping
-                            ? "Typing..."
-                            : isOnline
-                            ? "Online"
-                            : "Offline"}
+                        {isOnline.current ? "Online" : "offline"}
                     </span>
                 </div>
             </div>

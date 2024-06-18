@@ -29,7 +29,7 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
         (await fetchRedis(
             "smembers",
             `user:${session.user.id}:incoming_friend_requests`
-        )) as string[]
+        )) as User[]
     ).length;
 
     return (
