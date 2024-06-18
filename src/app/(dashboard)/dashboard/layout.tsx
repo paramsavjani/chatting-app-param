@@ -1,16 +1,11 @@
-import { FiUsers, FiMessageSquare, FiUserPlus } from "react-icons/fi";
 import { getFriendsByUserId } from "@/helpers/get-friends-by-user-id";
 import { authOptions } from "@/lib/auth";
-import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { notFound } from "next/navigation";
-import { FC, ReactNode } from "react";
-import Image from "next/image";
-import SignOutButton from "@/components/SignOutButton";
-import FriendRequestSidebarOptions from "@/components/FriendRequestSidebarOptions";
+import { FC, ReactNode, useEffect } from "react";
 import { fetchRedis } from "@/helpers/redis";
-import dashboard from "@/components/Dashboard";
 import Dasboard from "@/components/Dashboard";
+import { pusherServer } from "@/lib/pusher";
 
 export const metadata = {
     title: "ChatterSphere | Dashboard",
@@ -33,8 +28,29 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
         (await fetchRedis(
             "smembers",
             `user:${session.user.id}:incoming_friend_requests`
-        )) as User[]
+        )) as string[]
     ).length;
+
+    useEffect(() => {
+        const updateStatus = async () => {
+            pusherServer.trigger("status", `${session.user.id}`, {
+                status: "online",
+            });
+        };
+
+        updateStatus();
+
+        return () => {
+            // Optionally, update status to 'offline' when the component unmounts
+            const updateStatusToOffline = async () => {
+                pusherServer.trigger("status", `${session.user.id}`, {
+                    status: "offline",
+                });
+            };
+
+            updateStatusToOffline();
+        };
+    }, [session.user.id]);
 
     return (
         <div className="md:flex h-dvh">

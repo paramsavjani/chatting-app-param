@@ -1,9 +1,9 @@
 "use client";
+
 import { FC, useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { pusherClient } from "@/lib/pusher";
 import { cn, toPusherKey } from "@/lib/utils";
-import { CloudFog } from "lucide-react";
 
 interface ChattingPersonNameHeadingProps {
     chatPartner: User;
@@ -15,10 +15,22 @@ const ChattingPersonNameHeading: FC<ChattingPersonNameHeadingProps> = ({
     chatId,
 }) => {
     const [isTyping, setIsTyping] = useState<boolean>(false);
+    const [isOnline, setIsOnline] = useState<boolean>(false);
     const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
         const channel = pusherClient.subscribe(toPusherKey(`chat-${chatId}`));
+        const status = pusherClient.subscribe("status");
+
+        const handlestatus = ({ status }: { status: string }) => {
+            if (status === "online") {
+                setIsOnline(true);
+            } else {
+                setIsOnline(false);
+            }
+        };
+
+        status.bind(`${chatPartner.id}`, handlestatus);
 
         channel.bind("typing", ({ userId }: { userId: string }) => {
             if (userId === chatPartner.id) {
@@ -62,7 +74,11 @@ const ChattingPersonNameHeading: FC<ChattingPersonNameHeadingProps> = ({
                             "text-white": !isTyping,
                         })}
                     >
-                        {isTyping ? "Typing..." : "."}
+                        {isTyping
+                            ? "Typing..."
+                            : isOnline
+                            ? "Online"
+                            : "Offline"}
                     </span>
                 </div>
             </div>
