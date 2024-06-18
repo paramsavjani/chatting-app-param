@@ -1,10 +1,8 @@
-
-
-"use client"
+"use client";
 import { FC, useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { pusherClient } from "@/lib/pusher";
-import { toPusherKey } from "@/lib/utils";
+import { cn, toPusherKey } from "@/lib/utils";
 import { CloudFog } from "lucide-react";
 
 interface ChattingPersonNameHeadingProps {
@@ -59,11 +57,13 @@ const ChattingPersonNameHeading: FC<ChattingPersonNameHeadingProps> = ({
                     <span className="text-gray-800 font-bold text-lg">
                         {chatPartner.name}
                     </span>
-                    {isTyping && (
-                        <span className="text-sm text-gray-500 mt-1">
-                            Typing...
-                        </span>
-                    )}
+                    <span
+                        className={cn("text-sm text-gray-500 mt-1", {
+                            "text-white": !isTyping,
+                        })}
+                    >
+                        {isTyping ? "Typing..." : "."}
+                    </span>
                 </div>
             </div>
         </div>

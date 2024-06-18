@@ -40,7 +40,9 @@ const Dashboard: FC<LayoutProps> = ({
                         height={40}
                         style={{ filter: "invert(1)" }}
                     />
-                    <span className="text-xl font-semibold ml-2">ChatterSphere</span>
+                    <span className="text-xl font-semibold ml-2">
+                        ChatterSphere
+                    </span>
                 </div>
                 <button
                     onClick={() => setSidebarOpen(true)}
@@ -131,9 +133,7 @@ const Dashboard: FC<LayoutProps> = ({
                                 <span className="text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium">
                                     <FiUserPlus className="h-4 w-4" />
                                 </span>
-                                <span className="truncate">
-                                    Add friends
-                                </span>
+                                <span className="truncate">Add friends</span>
                             </Link>
                         </li>
                         <li>
