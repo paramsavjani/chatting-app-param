@@ -1,0 +1,23 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fadeIn {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.scrollbar-thumb-blue {
+    background-color: #5B21B6;
+}
+
+.scrollbar-track-blue-lighter {
+    background-color: #E0E7FF;
+}
