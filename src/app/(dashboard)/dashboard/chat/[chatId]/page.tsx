@@ -67,13 +67,13 @@ const Page = async ({ params }: pageProps) => {
             className="flex flex-col bg-gradient-to-b from-gray-100 to-gray-200 
              h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-3.5rem)] md:h-screen lg:h-screen xl:h-screen"
         >
-            <div className="fixed w-full z-10 bg-white shadow">
+            <div className="sticky w-full z-10 bg-white shadow">
                 <ChattingPersonNameHeading
                     chatPartner={chatPartner}
                     chatId={chatId}
                 />
             </div>
-            <div className="flex-1 overflow-y-auto mt-[4rem]">
+            <div className="flex-1 overflow-y-auto">
                 <Messages
                     chatId={chatId}
                     initialMessages={initialMessages}

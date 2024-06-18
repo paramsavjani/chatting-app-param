@@ -1,5 +1,6 @@
-"use client";
 
+
+"use client"
 import { FC, useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { pusherClient } from "@/lib/pusher";
@@ -20,7 +21,6 @@ const ChattingPersonNameHeading: FC<ChattingPersonNameHeadingProps> = ({
 
     useEffect(() => {
         const channel = pusherClient.subscribe(toPusherKey(`chat-${chatId}`));
-        console.log("userid");
 
         channel.bind("typing", ({ userId }: { userId: string }) => {
             if (userId === chatPartner.id) {
@@ -30,7 +30,7 @@ const ChattingPersonNameHeading: FC<ChattingPersonNameHeadingProps> = ({
                 }
                 typingTimeoutRef.current = setTimeout(() => {
                     setIsTyping(false);
-                }, 500); // Reset typing indicator after 3 seconds
+                }, 3000); // Reset typing indicator after 3 seconds
             }
         });
 
@@ -55,15 +55,14 @@ const ChattingPersonNameHeading: FC<ChattingPersonNameHeadingProps> = ({
                     />
                 </div>
 
-                <div className="flex flex-col leading-tight">
-                    <div className="text-lg flex items-center">
-                        <span className="text-gray-800 font-bold  w-auto">
-                            {chatPartner.name}
-                        </span>
-                    </div>
-
+                <div className="flex flex-col">
+                    <span className="text-gray-800 font-bold text-lg">
+                        {chatPartner.name}
+                    </span>
                     {isTyping && (
-                        <span className="text-sm text-gray-500">Typing...</span>
+                        <span className="text-sm text-gray-500 mt-1">
+                            Typing...
+                        </span>
                     )}
                 </div>
             </div>
